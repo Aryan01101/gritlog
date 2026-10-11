@@ -1,0 +1,16 @@
+{
+  "name": "gritlog",
+  "description": "Gritlog: honest streaks for real output in Claude Code",
+  "owner": {
+    "name": "Aryan Adhikari",
+    "url": "https://github.com/Aryan01101"
+  },
+  "plugins": [
+    {
+      "name": "gritlog",
+      "source": "./",
+      "description": "Log your reps: commits and passing tests build streaks and personal records",
+      "version": "0.1.0"
+    }
+  ]
+}
