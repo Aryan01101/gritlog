@@ -46,6 +46,15 @@ claude --plugin-dir /path/to/gritlog
 
 Claude Code **2.1.289 or newer**. Gritlog uses Claude Code's function-hooks mod API, which is in early access and may change between releases.
 
+## What it hooks
+
+Gritlog is a Claude Code mod. It registers:
+
+- **`tool.call` on Bash:** after each Bash command Claude Code runs, it reads the command text and whether it succeeded, to decide if it was a rep. It never changes, blocks or re-runs the command, and never reads its output.
+- **`session.start`:** loads your saved stats, registers the `/gritlog` command and sets the status line.
+- **`command.run` for `/gritlog`:** opens the stats pane.
+- **`ui.render` for its own pane:** draws the stats.
+
 ## Privacy
 
 Everything stays on your machine. Stats are kept in the mod's local store under your Claude Code config directory. Nothing is sent anywhere.
