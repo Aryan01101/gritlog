@@ -7,22 +7,24 @@ import { EMPTY, addRep, dayOf, liveStreak, repKind } from './logic'
 const PANE = 'gritlog'
 const stats = atom({ plugin: 'gritlog', key: 'stats' } as const, EMPTY)
 
-async function today($: EngineInterface) {
-  return dayOf(await $.clock.now())
+async function today($: EngineInterface, timeZone: string) {
+  return dayOf(await $.clock.now(), timeZone)
 }
 
-async function showStatus($: EngineInterface, s: Stats) {
-  const day = await today($)
+async function showStatus($: EngineInterface, s: Stats, timeZone: string) {
+  const day = await today($, timeZone)
   const reps = s.todayDay === day ? s.today : 0
   $.ui.status(`💪 ${reps} today · 🔥 ${liveStreak(s, day)}d (best ${s.best})`)
 }
 
-export const register: Register = on => {
+export const register: Register = (on, options) => {
+  const tz = String(options.timezone ?? '')
+
   on('session.start', async ($, e, next) => {
     const saved = ((await $.store.get('stats')) as Stats | undefined) ?? EMPTY
     await update($, stats, () => saved)
     await $.command.register({ name: 'gritlog', description: 'Show your reps, streak and records' })
-    await showStatus($, saved)
+    await showStatus($, saved, tz)
     return next(e)
   })
 
@@ -37,10 +39,10 @@ export const register: Register = on => {
     if (!kind || ran.deny !== undefined || ran.isError) return ran
 
     const before = await read($, stats)
-    const after = addRep(before, kind, await today($))
+    const after = addRep(before, kind, await today($, tz))
     await update($, stats, () => after)
     await $.store.set('stats', after)
-    await showStatus($, after)
+    await showStatus($, after, tz)
 
     if (after.best > before.best && after.best > 1) $.ui.toast(`🏆 New best streak: ${after.best} days`)
     else if (after.total % 25 === 0) $.ui.toast(`💪 ${after.total} lifetime reps`)
@@ -50,7 +52,7 @@ export const register: Register = on => {
   on('ui.render', { component: 'Pane', requestId: PANE }, async ($, e) => {
     const { Box, Text } = $.ui.resolve(e)
     const s = await read($, stats)
-    const day = await today($)
+    const day = await today($, tz)
     const streak = liveStreak(s, day)
     const gap = s.best - streak
 

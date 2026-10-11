@@ -2,6 +2,16 @@
 
 All notable changes to this project are documented here. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the project uses [Semantic Versioning](https://semver.org/).
 
+## [Unreleased]
+
+### Fixed
+
+- Days are counted in your computer's timezone instead of UTC, so late-evening reps no longer land on the next day and streaks no longer break early.
+
+### Added
+
+- `timezone` setting to override the timezone used for counting days.
+
 ## [0.1.1] - 2026-10-11
 
 ### Added

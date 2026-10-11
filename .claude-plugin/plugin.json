@@ -17,5 +17,13 @@
   "types": "./types/index.d.ts",
   "privacyPolicyUrl": "https://github.com/Aryan01101/gritlog#privacy",
   "supportUrl": "https://github.com/Aryan01101/gritlog/issues",
-  "documentationUrl": "https://github.com/Aryan01101/gritlog#readme"
+  "documentationUrl": "https://github.com/Aryan01101/gritlog#readme",
+  "userConfig": {
+    "timezone": {
+      "type": "string",
+      "title": "Timezone",
+      "description": "IANA timezone used to decide when a day starts, e.g. Asia/Kolkata. Leave empty to use your computer's timezone.",
+      "default": ""
+    }
+  }
 }

@@ -59,9 +59,11 @@ Gritlog is a Claude Code mod. It registers:
 
 Everything stays on your machine. Stats are kept in the mod's local store under your Claude Code config directory. Nothing is sent anywhere.
 
-## Known limitations
+## Settings
 
-- Days are counted in UTC, so a rep late in your evening may land on the next day.
+| Setting | Default | What it does |
+|---|---|---|
+| `timezone` | your computer's timezone | IANA timezone (e.g. `Asia/Kolkata`) used to decide when a day starts. Change it in `/config`. |
 
 ## Development
 

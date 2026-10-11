@@ -8,9 +8,19 @@ const TEST = /\b((npm|pnpm|yarn|bun)\s+(run\s+)?test|pytest|vitest|jest|go\s+tes
 export const repKind = (command: string): 'commits' | 'tests' | null =>
   COMMIT.test(command) ? 'commits' : TEST.test(command) ? 'tests' : null
 
-// ponytail: local-calendar day of the sandbox clock; add a timezone option if days land wrong
-export const dayOf = (ms: number) => new Date(ms).toISOString().slice(0, 10)
-const prevDay = (day: string) => dayOf(Date.parse(day) - 86_400_000)
+const fmt = (timeZone?: string) =>
+  new Intl.DateTimeFormat('en-CA', { timeZone, year: 'numeric', month: '2-digit', day: '2-digit' })
+
+/** Calendar day (YYYY-MM-DD) in `timeZone`, or the computer's own zone when it is empty or invalid. */
+export const dayOf = (ms: number, timeZone?: string) => {
+  try {
+    return fmt(timeZone || undefined).format(ms)
+  } catch {
+    return fmt().format(ms)
+  }
+}
+
+const prevDay = (day: string) => new Date(Date.parse(day) - 86_400_000).toISOString().slice(0, 10)
 
 /** Streak as it honestly stands today: broken if you skipped yesterday. */
 export const liveStreak = (s: Stats, today: string) =>
