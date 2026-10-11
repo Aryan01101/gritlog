@@ -1,0 +1,11 @@
+{
+  "name": "gritlog",
+  "version": "0.1.0",
+  "description": "Log your reps: commits and passing tests build streaks and personal records",
+  "author": { "name": "Aryan Adhikari", "url": "https://github.com/Aryan01101" },
+  "homepage": "https://github.com/Aryan01101/gritlog",
+  "repository": "https://github.com/Aryan01101/gritlog",
+  "license": "MIT",
+  "keywords": ["productivity", "streaks", "habits"],
+  "types": "./types/index.d.ts"
+}
