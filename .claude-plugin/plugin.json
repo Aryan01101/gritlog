@@ -1,6 +1,6 @@
 {
   "name": "gritlog",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "Log your reps: commits and passing tests build streaks and personal records",
   "author": {
     "name": "Aryan Adhikari",

@@ -10,7 +10,7 @@
       "name": "gritlog",
       "source": "./",
       "description": "Log your reps: commits and passing tests build streaks and personal records",
-      "version": "0.1.1"
+      "version": "0.2.0"
     }
   ]
 }
